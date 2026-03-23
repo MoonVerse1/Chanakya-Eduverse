@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="EduVerse Physics — From Newton's Laws to Quantum Mechanics. Deep, clear, and unforgettable physics lessons for every level."/>
+<title>Physics — EduVerse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy:       #070d1f;
+  --navy-mid:   #0e1833;
+  --navy-light: #162040;
+  --navy-card:  #111d3a;
+  --cream:      #f0ead6;
+  --cream-dim:  #c8bfa8;
+  --teal:       #00d4b4;
+  --teal-dim:   #009e87;
+  --teal-glow:  rgba(0,212,180,0.15);
+  --amber:      #f4a523;
+  --rose:       #e05c7a;
+  --violet:     #9b6bff;
+  --text-light: #e2dccf;
+  --text-muted: #8a8070;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--text-light);font-family:'Lora',Georgia,serif;overflow-x:hidden;cursor:none;}
+
+/* CURSOR */
+.cursor{position:fixed;width:12px;height:12px;background:var(--teal);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:screen;}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,180,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .25s ease;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:var(--teal-dim);border-radius:3px;}
+
+/* ── NAVBAR ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(7,13,31,.9);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,212,180,.1);}
+nav.scrolled{padding:.8rem 4rem;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--cream);text-decoration:none;}
+.nav-logo span{color:var(--teal);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.88rem;color:var(--cream-dim);text-decoration:none;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--teal);transition:width .3s;}
+.nav-links a:hover{color:var(--teal);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a.active{color:var(--teal);}
+.nav-cta{background:transparent;border:1px solid var(--teal);color:var(--teal);padding:.5rem 1.4rem;border-radius:2px;font-family:'Lora',serif;font-size:.85rem;cursor:none;transition:background .25s,color .25s;}
+.nav-cta:hover{background:var(--teal);color:var(--navy);}
+
+/* ── AD TOP ── */
+.ad-banner-top{background:rgba(14,24,51,.95);border-bottom:1px solid rgba(0,212,180,.07);text-align:center;padding:.5rem;margin-top:72px;position:relative;z-index:10;}
+.ad-placeholder{display:inline-flex;align-items:center;justify-content:center;background:rgba(0,212,180,.03);border:1px dashed rgba(0,212,180,.18);border-radius:2px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:1px;}
+.ad-placeholder.leaderboard{width:728px;max-width:100%;height:60px;}
+.ad-placeholder.rectangle{width:336px;height:280px;}
+.ad-placeholder.sidebar-sm{width:300px;height:250px;}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{position:relative;z-index:10;background:var(--navy-mid);border-bottom:1px solid rgba(240,234,214,.05);padding:.75rem 4rem;display:flex;align-items:center;gap:.6rem;font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:1px;}
+.breadcrumb a{color:var(--teal);text-decoration:none;transition:opacity .2s;}
+.breadcrumb a:hover{opacity:.7;}
+.breadcrumb span{color:var(--text-muted);}
+.breadcrumb-current{color:var(--cream-dim);}
+
+/* ── SUBJECT HERO ── */
+.subject-hero{position:relative;z-index:10;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 60%,#0a1f1c 100%);padding:4rem 4rem 0;overflow:hidden;}
+.subject-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 80% at 80% 50%,rgba(0,212,180,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(244,165,35,.04) 0%,transparent 60%);pointer-events:none;}
+
+.hero-inner{display:grid;grid-template-columns:1fr auto;gap:3rem;align-items:center;max-width:1200px;margin:0 auto;position:relative;z-index:2;}
+
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,212,180,.1);border:1px solid rgba(0,212,180,.25);border-radius:2px;padding:.35rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:3px;color:var(--teal);text-transform:uppercase;margin-bottom:1.2rem;}
+
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,6vw,5rem);font-weight:900;color:var(--cream);line-height:1;letter-spacing:-2px;margin-bottom:1rem;}
+.hero-title span{color:var(--teal);}
+
+.hero-desc{font-size:1rem;color:var(--cream-dim);line-height:1.75;max-width:520px;margin-bottom:2rem;}
+
+.hero-meta{display:flex;gap:2.5rem;flex-wrap:wrap;}
+.meta-item{display:flex;flex-direction:column;gap:.2rem;}
+.meta-val{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--cream);}
+.meta-val span{color:var(--teal);}
+.meta-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;}
+
+/* Physics atom visual */
+.atom-visual{position:relative;width:280px;height:280px;flex-shrink:0;}
+.atom-nucleus{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;background:var(--teal);border-radius:50%;box-shadow:0 0 30px var(--teal),0 0 60px rgba(0,212,180,.4);animation:pulse-nucleus 2s ease-in-out infinite;}
+.orbit{position:absolute;top:50%;left:50%;border:1px solid rgba(0,212,180,.3);border-radius:50%;transform:translate(-50%,-50%);}
+.orbit-1{width:120px;height:60px;animation:spin1 3s linear infinite;}
+.orbit-2{width:160px;height:80px;animation:spin2 4s linear infinite;}
+.orbit-3{width:200px;height:100px;animation:spin3 5s linear infinite;}
+.electron{position:absolute;width:8px;height:8px;background:var(--teal);border-radius:50%;box-shadow:0 0 8px var(--teal);}
+.e1{top:-4px;left:50%;margin-left:-4px;}
+.e2{bottom:-4px;left:50%;margin-left:-4px;}
+.e3{top:-4px;left:50%;margin-left:-4px;}
+@keyframes spin1{from{transform:translate(-50%,-50%) rotateZ(0deg) rotateX(70deg);}to{transform:translate(-50%,-50%) rotateZ(360deg) rotateX(70deg);}}
+@keyframes spin2{from{transform:translate(-50%,-50%) rotateZ(120deg) rotateX(70deg);}to{transform:translate(-50%,-50%) rotateZ(480deg) rotateX(70deg);}}
+@keyframes spin3{from{transform:translate(-50%,-50%) rotateZ(240deg) rotateX(70deg);}to{transform:translate(-50%,-50%) rotateZ(600deg) rotateX(70deg);}}
+@keyframes pulse-nucleus{0%,100%{box-shadow:0 0 20px var(--teal),0 0 40px rgba(0,212,180,.4);}50%{box-shadow:0 0 40px var(--teal),0 0 80px rgba(0,212,180,.6);}}
+
+/* wave svg line below hero */
+.hero-wave{display:block;width:100%;margin-top:3rem;opacity:.15;}
+
+/* ── FILTER BAR ── */
+.filter-bar{position:sticky;top:72px;z-index:90;background:rgba(11,18,40,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,212,180,.1);padding:.9rem 4rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;}
+.filter-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;flex-shrink:0;}
+.filter-chips{display:flex;gap:.6rem;flex-wrap:wrap;flex:1;}
+.chip{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;padding:.38rem .9rem;border-radius:2px;border:1px solid rgba(0,212,180,.2);color:var(--text-muted);background:transparent;cursor:none;transition:all .2s;}
+.chip:hover,.chip.active{background:rgba(0,212,180,.1);border-color:var(--teal);color:var(--teal);}
+.chip.all.active{background:var(--teal);color:var(--navy);border-color:var(--teal);}
+.search-box{display:flex;align-items:center;gap:.5rem;background:rgba(22,32,64,.8);border:1px solid rgba(0,212,180,.15);border-radius:2px;padding:.38rem .9rem;transition:border-color .3s;}
+.search-box:focus-within{border-color:var(--teal);}
+.search-box input{background:transparent;border:none;outline:none;font-family:'Lora',serif;font-size:.82rem;color:var(--cream);width:160px;}
+.search-box input::placeholder{color:var(--text-muted);}
+.search-icon{color:var(--text-muted);font-size:.85rem;}
+
+/* ── MAIN LAYOUT ── */
+.page-body{display:grid;grid-template-columns:1fr 300px;gap:2rem;max-width:1200px;margin:0 auto;padding:3rem 4rem;position:relative;z-index:10;}
+
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:1.5rem;}
+.sidebar-card{background:var(--navy-mid);border:1px solid rgba(240,234,214,.07);border-radius:4px;padding:1.5rem;position:sticky;top:140px;}
+.sidebar-title{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--cream);margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid rgba(240,234,214,.07);}
+.topic-progress{display:flex;flex-direction:column;gap:.75rem;}
+.progress-item{display:flex;flex-direction:column;gap:.35rem;}
+.progress-header{display:flex;justify-content:space-between;align-items:center;}
+.progress-name{font-size:.8rem;color:var(--cream-dim);}
+.progress-pct{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--teal);}
+.progress-bar{height:3px;background:rgba(0,212,180,.12);border-radius:2px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal-dim),var(--teal));border-radius:2px;transition:width .8s ease;}
+
+.quick-links{display:flex;flex-direction:column;gap:.5rem;margin-top:.5rem;}
+.quick-link{display:flex;align-items:center;justify-content:space-between;padding:.6rem .8rem;border-radius:3px;text-decoration:none;font-size:.83rem;color:var(--cream-dim);transition:background .2s,color .2s;cursor:none;}
+.quick-link:hover{background:rgba(0,212,180,.08);color:var(--teal);}
+.quick-link-icon{font-size:1rem;}
+.quick-link-arrow{font-size:.75rem;color:var(--text-muted);transition:transform .2s;}
+.quick-link:hover .quick-link-arrow{transform:translateX(3px);color:var(--teal);}
+
+/* ── CHAPTERS ── */
+.chapters-main{}
+.chapter-block{margin-bottom:3rem;opacity:0;transform:translateY(16px);}
+.chapter-block.visible{animation:fadeUp .55s ease forwards;}
+
+.chapter-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.2rem;cursor:none;}
+.chapter-num{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:3px;color:var(--teal);background:rgba(0,212,180,.08);border:1px solid rgba(0,212,180,.2);padding:.3rem .7rem;border-radius:2px;flex-shrink:0;}
+.chapter-title-text{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--cream);}
+.chapter-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(0,212,180,.2),transparent);}
+.chapter-count{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-muted);white-space:nowrap;}
+
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;}
+
+.topic-card{background:var(--navy-card);border:1px solid rgba(240,234,214,.06);border-radius:3px;padding:1.3rem;cursor:none;transition:transform .25s,border-color .25s,box-shadow .25s;text-decoration:none;display:block;position:relative;overflow:hidden;}
+.topic-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top left,rgba(0,212,180,.08),transparent 70%);opacity:0;transition:opacity .3s;}
+.topic-card:hover{transform:translateY(-4px);border-color:rgba(0,212,180,.3);box-shadow:0 12px 35px rgba(0,0,0,.4),0 0 0 1px rgba(0,212,180,.05);}
+.topic-card:hover::before{opacity:1;}
+
+.topic-icon{font-size:1.6rem;margin-bottom:.8rem;display:block;}
+.topic-name{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;color:var(--cream);line-height:1.35;margin-bottom:.5rem;transition:color .2s;}
+.topic-card:hover .topic-name{color:var(--teal);}
+.topic-desc{font-size:.75rem;color:var(--text-muted);line-height:1.6;margin-bottom:.8rem;}
+.topic-meta{display:flex;align-items:center;justify-content:space-between;}
+.topic-lessons{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);letter-spacing:1px;}
+.topic-diff{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.2rem .5rem;border-radius:2px;}
+.diff-beginner{background:rgba(76,187,122,.1);color:#4cbb7a;border:1px solid rgba(76,187,122,.2);}
+.diff-intermediate{background:rgba(244,165,35,.1);color:var(--amber);border:1px solid rgba(244,165,35,.2);}
+.diff-advanced{background:rgba(224,92,122,.1);color:var(--rose);border:1px solid rgba(224,92,122,.2);}
+
+/* FEATURED card (big) */
+.topic-card.featured{grid-column:span 2;display:flex;gap:1.5rem;align-items:center;background:linear-gradient(135deg,var(--navy-card) 0%,rgba(0,40,35,.6) 100%);border-color:rgba(0,212,180,.15);}
+.featured-left{flex:1;}
+.featured-thumb{width:140px;height:100px;border-radius:3px;background:linear-gradient(135deg,#0a1929 0%,#0d3b35 100%);display:flex;align-items:center;justify-content:center;font-size:3rem;flex-shrink:0;position:relative;overflow:hidden;}
+.featured-thumb::after{content:'FEATURED';position:absolute;top:.4rem;right:.4rem;font-family:'JetBrains Mono',monospace;font-size:.52rem;letter-spacing:1.5px;background:var(--teal);color:var(--navy);padding:.15rem .4rem;border-radius:1px;}
+
+/* ── AD IN-CONTENT ── */
+.ad-inline{text-align:center;padding:1.5rem 0;border-top:1px solid rgba(0,212,180,.05);border-bottom:1px solid rgba(0,212,180,.05);margin:2rem 0;}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── FOOTER STRIP ── */
+.footer-strip{background:#040810;border-top:1px solid rgba(240,234,214,.05);padding:2rem 4rem;text-align:center;position:relative;z-index:10;}
+.footer-strip p{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text-muted);letter-spacing:.5px;}
+.footer-strip a{color:var(--teal);text-decoration:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){.page-body{grid-template-columns:1fr;}.sidebar{display:none;}.atom-visual{display:none;}.hero-inner{grid-template-columns:1fr;}}
+@media(max-width:768px){nav{padding:1rem 1.5rem;}.nav-links{display:none;}.subject-hero,.filter-bar,.page-body,.footer-strip{padding-left:1.5rem;padding-right:1.5rem;}.topic-card.featured{flex-direction:column;grid-column:span 1;}.topics-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Edu<span>Verse</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#" class="active">Physics</a></li>
+    <li><a href="#">Biology</a></li>
+    <li><a href="#">Mathematics</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button class="nav-cta">My Learning</button>
+</nav>
+
+<!-- ═══ ADSENSE: LEADERBOARD ═══ -->
+<div class="ad-banner-top">
+  <!-- ADSENSE: LEADERBOARD 728×90 -->
+  <div class="ad-placeholder leaderboard">[ AdSense Leaderboard 728×90 ]</div>
+</div>
+
+<!-- ═══ BREADCRUMB ═══ -->
+<div class="breadcrumb">
+  <a href="index.html">HOME</a>
+  <span>/</span>
+  <a href="#">SUBJECTS</a>
+  <span>/</span>
+  <span class="breadcrumb-current">PHYSICS</span>
+</div>
+
+<!-- ═══ SUBJECT HERO ═══ -->
+<div class="subject-hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">⚛️ &nbsp; Natural Sciences</div>
+      <h1 class="hero-title">Phy<span>sics</span></h1>
+      <p class="hero-desc">
+        The oldest question humanity ever asked was <em>"Why does this fall?"</em>
+        Physics is our best attempt at an answer — and it turns out, the answer
+        is stranger and more beautiful than anyone expected.
+      </p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-val">48<span>+</span></span>
+          <span class="meta-label">Lessons</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-val">8</span>
+          <span class="meta-label">Chapters</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-val">3</span>
+          <span class="meta-label">Class Levels</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-val">Free<span>.</span></span>
+          <span class="meta-label">Always</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Atom Animation -->
+    <div class="atom-visual">
+      <div class="atom-nucleus"></div>
+      <div class="orbit orbit-1"><div class="electron e1"></div></div>
+      <div class="orbit orbit-2"><div class="electron e2"></div></div>
+      <div class="orbit orbit-3"><div class="electron e3"></div></div>
+    </div>
+  </div>
+
+  <!-- Wave bottom -->
+  <svg class="hero-wave" viewBox="0 0 1440 40" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <path d="M0,20 C240,40 480,0 720,20 C960,40 1200,0 1440,20 L1440,40 L0,40 Z" fill="#0e1833"/>
+  </svg>
+</div>
+
+<!-- ═══ FILTER BAR ═══ -->
+<div class="filter-bar" id="filterBar">
+  <span class="filter-label">Filter:</span>
+  <div class="filter-chips">
+    <button class="chip all active" onclick="filterTopics('all',this)">All</button>
+    <button class="chip" onclick="filterTopics('class9',this)">Class 9</button>
+    <button class="chip" onclick="filterTopics('class10',this)">Class 10</button>
+    <button class="chip" onclick="filterTopics('class11',this)">Class 11</button>
+    <button class="chip" onclick="filterTopics('class12',this)">Class 12</button>
+    <button class="chip" onclick="filterTopics('beginner',this)">Beginner</button>
+    <button class="chip" onclick="filterTopics('intermediate',this)">Intermediate</button>
+    <button class="chip" onclick="filterTopics('advanced',this)">Advanced</button>
+  </div>
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" placeholder="Search topics..." id="searchInput" oninput="searchTopics(this.value)"/>
+  </div>
+</div>
+
+<!-- ═══ PAGE BODY ═══ -->
+<div class="page-body">
+
+  <!-- ── MAIN CHAPTERS ── -->
+  <main class="chapters-main">
+
+    <!-- CHAPTER 1 -->
+    <div class="chapter-block scroll-reveal" data-chapter="1">
+      <div class="chapter-header">
+        <span class="chapter-num">CH — 01</span>
+        <h2 class="chapter-title-text">Laws of Motion</h2>
+        <div class="chapter-line"></div>
+        <span class="chapter-count">6 lessons</span>
+      </div>
+      <div class="topics-grid">
+
+        <a href="lesson.html" class="topic-card featured" data-level="class9 class10 beginner">
+          <div class="featured-thumb">🍎</div>
+          <div class="featured-left">
+            <span class="topic-icon" style="font-size:1rem;margin:0 0 .4rem;display:block">⚡ Start Here</span>
+            <div class="topic-name">Newton's Three Laws — The Rules That Run the Universe</div>
+            <div class="topic-desc">Why does your coffee stay still when you brake? Why does a rocket fly? Three laws. All answers.</div>
+            <div class="topic-meta">
+              <span class="topic-lessons">6 LESSONS · 45 MIN</span>
+              <span class="topic-diff diff-beginner">BEGINNER</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class9 beginner">
+          <span class="topic-icon">📐</span>
+          <div class="topic-name">Inertia: Why You Fly Forward When a Bus Brakes</div>
+          <div class="topic-desc">The tendency of matter to do absolutely nothing unless forced. Very relatable.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">2 LESSONS</span>
+            <span class="topic-diff diff-beginner">BEGINNER</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class9 class10 intermediate">
+          <span class="topic-icon">⚖️</span>
+          <div class="topic-name">Force, Mass & Acceleration (F = ma)</div>
+          <div class="topic-desc">The most powerful three characters in all of physics. One equation, infinite applications.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">3 LESSONS</span>
+            <span class="topic-diff diff-intermediate">INTERMEDIATE</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class9 class10 intermediate">
+          <span class="topic-icon">🚀</span>
+          <div class="topic-name">Action & Reaction: Why Rockets Work in Empty Space</div>
+          <div class="topic-desc">Newton's third law is why walking, swimming, and space travel all work. Same principle.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">2 LESSONS</span>
+            <span class="topic-diff diff-intermediate">INTERMEDIATE</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class10 class11 advanced">
+          <span class="topic-icon">🔄</span>
+          <div class="topic-name">Momentum & Its Conservation</div>
+          <div class="topic-desc">A snooker ball hits another and stops. Where did the motion go? It didn't — it transferred.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">4 LESSONS</span>
+            <span class="topic-diff diff-advanced">ADVANCED</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- CHAPTER 2 -->
+    <div class="chapter-block scroll-reveal" data-chapter="2">
+      <div class="chapter-header">
+        <span class="chapter-num">CH — 02</span>
+        <h2 class="chapter-title-text">Gravitation</h2>
+        <div class="chapter-line"></div>
+        <span class="chapter-count">5 lessons</span>
+      </div>
+      <div class="topics-grid">
+
+        <a href="lesson.html" class="topic-card" data-level="class9 beginner">
+          <span class="topic-icon">🌍</span>
+          <div class="topic-name">Universal Gravitation: Newton's Apple Wasn't the Whole Story</div>
+          <div class="topic-desc">Every mass attracts every other mass. The Moon, the apple, and your morning coffee — all connected.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">3 LESSONS</span>
+            <span class="topic-diff diff-beginner">BEGINNER</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class9 class10 intermediate">
+          <span class="topic-icon">⬇️</span>
+          <div class="topic-name">Free Fall & Acceleration Due to Gravity</div>
+          <div class="topic-desc">A hammer and a feather hit the Moon at the same time. Galileo was right. Here's why.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">2 LESSONS</span>
+            <span class="topic-diff diff-intermediate">INTERMEDIATE</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class10 class11 intermediate">
+          <span class="topic-icon">🌕</span>
+          <div class="topic-name">Orbital Motion & Why Satellites Don't Fall</div>
+          <div class="topic-desc">They do fall — they just keep missing the Earth. Circular motion as an act of perpetual falling.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">3 LESSONS</span>
+            <span class="topic-diff diff-intermediate">INTERMEDIATE</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class11 class12 advanced">
+          <span class="topic-icon">⏳</span>
+          <div class="topic-name">Gravitational Time Dilation: Einstein's Wild Addition</div>
+          <div class="topic-desc">Time runs slower near massive objects. Your GPS only works because someone corrected for this.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">2 LESSONS</span>
+            <span class="topic-diff diff-advanced">ADVANCED</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ══ ADSENSE IN-CONTENT ══ -->
+    <div class="ad-inline">
+      <!-- ADSENSE: IN-CONTENT RECTANGLE 336×280 -->
+      <div class="ad-placeholder rectangle">[ AdSense Rectangle 336×280 ]</div>
+    </div>
+
+    <!-- CHAPTER 3 -->
+    <div class="chapter-block scroll-reveal" data-chapter="3">
+      <div class="chapter-header">
+        <span class="chapter-num">CH — 03</span>
+        <h2 class="chapter-title-text">Work, Energy & Power</h2>
+        <div class="chapter-line"></div>
+        <span class="chapter-count">6 lessons</span>
+      </div>
+      <div class="topics-grid">
+
+        <a href="lesson.html" class="topic-card" data-level="class9 beginner">
+          <span class="topic-icon">💪</span>
+          <div class="topic-name">What "Work" Actually Means in Physics (It's Not What You Think)</div>
+          <div class="topic-desc">Holding a heavy bag involves no work. Physicists are surprisingly strict about this.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">2 LESSONS</span>
+            <span class="topic-diff diff-beginner">BEGINNER</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class9 class10 intermediate">
+          <span class="topic-icon">⚡</span>
+          <div class="topic-name">Kinetic & Potential Energy: The Universe's Two Savings Accounts</div>
+          <div class="topic-desc">Energy is never created or destroyed — it just changes costumes. The most fundamental truth in physics.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">4 LESSONS</span>
+            <span class="topic-diff diff-intermediate">INTERMEDIATE</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class10 intermediate">
+          <span class="topic-icon">🔋</span>
+          <div class="topic-name">Conservation of Energy: The Law That Cannot Be Broken</div>
+          <div class="topic-desc">No exception. No loophole. No perpetual motion machine. Ever. This law is the universe's constitution.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">3 LESSONS</span>
+            <span class="topic-diff diff-intermediate">INTERMEDIATE</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class9 class10 beginner">
+          <span class="topic-icon">🏎️</span>
+          <div class="topic-name">Power: Speed of Doing Work</div>
+          <div class="topic-desc">Same task, less time = more power. Why 100W bulbs are brighter and F1 engines are monsters.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">2 LESSONS</span>
+            <span class="topic-diff diff-beginner">BEGINNER</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- CHAPTER 4 -->
+    <div class="chapter-block scroll-reveal" data-chapter="4">
+      <div class="chapter-header">
+        <span class="chapter-num">CH — 04</span>
+        <h2 class="chapter-title-text">Light & Optics</h2>
+        <div class="chapter-line"></div>
+        <span class="chapter-count">7 lessons</span>
+      </div>
+      <div class="topics-grid">
+
+        <a href="lesson.html" class="topic-card featured" data-level="class10 class11 intermediate">
+          <div class="featured-thumb">🌊</div>
+          <div class="featured-left">
+            <span class="topic-icon" style="font-size:1rem;margin:0 0 .4rem;display:block">🔥 Most Popular</span>
+            <div class="topic-name">Young's Double Slit Experiment: The Day Physics Broke Its Own Rules</div>
+            <div class="topic-desc">Light went through two holes and created an impossible pattern. This one experiment forced us to rethink reality itself.</div>
+            <div class="topic-meta">
+              <span class="topic-lessons">5 LESSONS · 40 MIN</span>
+              <span class="topic-diff diff-advanced">ADVANCED</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class10 beginner">
+          <span class="topic-icon">🪞</span>
+          <div class="topic-name">Reflection & Mirrors: Why Your Reflection Is Left-Right Flipped</div>
+          <div class="topic-desc">Actually — it's not. And the real answer is far more interesting than the common explanation.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">3 LESSONS</span>
+            <span class="topic-diff diff-beginner">BEGINNER</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class10 intermediate">
+          <span class="topic-icon">🔬</span>
+          <div class="topic-name">Refraction & Lenses: Why a Straw Looks Bent in Water</div>
+          <div class="topic-desc">Light slows down in denser media and bends. This is why lenses, glasses, and cameras exist.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">4 LESSONS</span>
+            <span class="topic-diff diff-intermediate">INTERMEDIATE</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class10 class11 advanced">
+          <span class="topic-icon">🌈</span>
+          <div class="topic-name">Dispersion of Light & Why Rainbows Are Circular</div>
+          <div class="topic-desc">White light is actually all colors compressed together. A raindrop is a prism. And rainbows are always full circles.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">2 LESSONS</span>
+            <span class="topic-diff diff-advanced">ADVANCED</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- CHAPTER 5 -->
+    <div class="chapter-block scroll-reveal" data-chapter="5">
+      <div class="chapter-header">
+        <span class="chapter-num">CH — 05</span>
+        <h2 class="chapter-title-text">Electricity & Magnetism</h2>
+        <div class="chapter-line"></div>
+        <span class="chapter-count">8 lessons</span>
+      </div>
+      <div class="topics-grid">
+
+        <a href="lesson.html" class="topic-card" data-level="class10 beginner">
+          <span class="topic-icon">🔌</span>
+          <div class="topic-name">Electric Current: Electrons on a Highway</div>
+          <div class="topic-desc">Current, voltage, and resistance. Ohm's Law is the traffic law of electricity — and it never fails.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">4 LESSONS</span>
+            <span class="topic-diff diff-beginner">BEGINNER</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class10 class11 intermediate">
+          <span class="topic-icon">🧲</span>
+          <div class="topic-name">Magnetic Effects of Electric Current</div>
+          <div class="topic-desc">Move electrons — create a magnetic field. Move a magnet — create electrons moving. They are the same force.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">5 LESSONS</span>
+            <span class="topic-diff diff-intermediate">INTERMEDIATE</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class11 class12 advanced">
+          <span class="topic-icon">🌐</span>
+          <div class="topic-name">Electromagnetic Induction: Faraday's Greatest Gift</div>
+          <div class="topic-desc">How every power plant, transformer, and electric motor on Earth works. One law. Unlimited power.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">4 LESSONS</span>
+            <span class="topic-diff diff-advanced">ADVANCED</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class12 advanced">
+          <span class="topic-icon">📡</span>
+          <div class="topic-name">Maxwell's Equations: The Four Lines That Predicted Wifi</div>
+          <div class="topic-desc">James Maxwell wrote four equations, predicted electromagnetic waves, and accidentally invented everything wireless.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">3 LESSONS</span>
+            <span class="topic-diff diff-advanced">ADVANCED</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ══ ADSENSE IN-CONTENT 2 ══ -->
+    <div class="ad-inline">
+      <!-- ADSENSE: IN-CONTENT RECTANGLE 336×280 -->
+      <div class="ad-placeholder rectangle">[ AdSense Rectangle 336×280 ]</div>
+    </div>
+
+    <!-- CHAPTER 6 -->
+    <div class="chapter-block scroll-reveal" data-chapter="6">
+      <div class="chapter-header">
+        <span class="chapter-num">CH — 06</span>
+        <h2 class="chapter-title-text">Thermodynamics</h2>
+        <div class="chapter-line"></div>
+        <span class="chapter-count">5 lessons</span>
+      </div>
+      <div class="topics-grid">
+
+        <a href="lesson.html" class="topic-card" data-level="class11 intermediate">
+          <span class="topic-icon">🌡️</span>
+          <div class="topic-name">Heat, Temperature & Internal Energy</div>
+          <div class="topic-desc">Heat is not temperature. Temperature is not energy. All three are different things. Crucially different.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">3 LESSONS</span>
+            <span class="topic-diff diff-intermediate">INTERMEDIATE</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class11 class12 advanced">
+          <span class="topic-icon">♻️</span>
+          <div class="topic-name">Laws of Thermodynamics: Why Time Has a Direction</div>
+          <div class="topic-desc">You can't unscramble an egg. The second law explains why — and it's the deepest reason the past is different from the future.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">4 LESSONS</span>
+            <span class="topic-diff diff-advanced">ADVANCED</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class12 advanced">
+          <span class="topic-icon">💀</span>
+          <div class="topic-name">Entropy: The Universe's Inevitable Slide into Chaos</div>
+          <div class="topic-desc">Everything tends toward disorder. Your room, the universe, your coffee getting cold — all the same law.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">2 LESSONS</span>
+            <span class="topic-diff diff-advanced">ADVANCED</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- CHAPTER 7 -->
+    <div class="chapter-block scroll-reveal" data-chapter="7">
+      <div class="chapter-header">
+        <span class="chapter-num">CH — 07</span>
+        <h2 class="chapter-title-text">Modern Physics & Quantum Mechanics</h2>
+        <div class="chapter-line"></div>
+        <span class="chapter-count">6 lessons</span>
+      </div>
+      <div class="topics-grid">
+
+        <a href="lesson.html" class="topic-card" data-level="class12 advanced">
+          <span class="topic-icon">🐱</span>
+          <div class="topic-name">Schrödinger's Cat & the Measurement Problem</div>
+          <div class="topic-desc">A cat that is both alive and dead. Not a riddle — an actual problem that physicists argue about to this day.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">3 LESSONS</span>
+            <span class="topic-diff diff-advanced">ADVANCED</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card" data-level="class12 advanced">
+          <span class="topic-icon">👻</span>
+          <div class="topic-name">Wave-Particle Duality: Light Is Both, Always</div>
+          <div class="topic-desc">Not a metaphor. Not an approximation. Light genuinely behaves like a wave AND a particle simultaneously.</div>
+          <div class="topic-meta">
+            <span class="topic-lessons">3 LESSONS</span>
+            <span class="topic-diff diff-advanced">ADVANCED</span>
+          </div>
+        </a>
+
+        <a href="lesson.html" class="topic-card featured" data-level="class12 advanced">
+          <div class="featured-thumb" style="background:linear-gradient(135deg,#0a0520 0%,#1a0840 100%)">💫</div>
+          <div class="featured-left">
+            <span class="topic-icon" style="font-size:1rem;margin:0 0 .4rem;display:block">🌌 Mind-bending</span>
+            <div class="topic-name">Special Relativity: Why E = mc² and Time Travel Is Theoretically Legal</div>
+            <div class="topic-desc">Space and time are not fixed. Speed affects time. Mass and energy are the same thing. Einstein was 26 when he figured this out.</div>
+            <div class="topic-meta">
+              <span class="topic-lessons">5 LESSONS · 50 MIN</span>
+              <span class="topic-diff diff-advanced">ADVANCED</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </main><!-- /chapters-main -->
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <!-- Ad -->
+    <div style="text-align:center">
+      <!-- ADSENSE: SIDEBAR 300×250 -->
+      <div class="ad-placeholder sidebar-sm">[ AdSense 300×250 ]</div>
+    </div>
+
+    <!-- Progress -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">📊 Chapter Progress</div>
+      <div class="topic-progress">
+        <div class="progress-item">
+          <div class="progress-header"><span class="progress-name">Laws of Motion</span><span class="progress-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header"><span class="progress-name">Gravitation</span><span class="progress-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header"><span class="progress-name">Work & Energy</span><span class="progress-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header"><span class="progress-name">Light & Optics</span><span class="progress-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header"><span class="progress-name">Electricity</span><span class="progress-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header"><span class="progress-name">Thermodynamics</span><span class="progress-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header"><span class="progress-name">Modern Physics</span><span class="progress-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Other Subjects -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">🧭 Explore More</div>
+      <div class="quick-links">
+        <a href="#" class="quick-link"><span><span class="quick-link-icon">🧬</span> Biology</span><span class="quick-link-arrow">→</span></a>
+        <a href="#" class="quick-link"><span><span class="quick-link-icon">🧪</span> Chemistry</span><span class="quick-link-arrow">→</span></a>
+        <a href="#" class="quick-link"><span><span class="quick-link-icon">∑</span> Mathematics</span><span class="quick-link-arrow">→</span></a>
+        <a href="#" class="quick-link"><span><span class="quick-link-icon">🦉</span> Philosophy</span><span class="quick-link-arrow">→</span></a>
+        <a href="#" class="quick-link"><span><span class="quick-link-icon">🧠</span> Psychology</span><span class="quick-link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- Second Ad -->
+    <div style="text-align:center;margin-top:.5rem">
+      <!-- ADSENSE: SIDEBAR 300×250 -->
+      <div class="ad-placeholder sidebar-sm">[ AdSense 300×250 ]</div>
+    </div>
+
+  </aside>
+</div><!-- /page-body -->
+
+<!-- ═══ FOOTER STRIP ═══ -->
+<div class="footer-strip">
+  <p>© 2025 <a href="index.html">EduVerse</a> — Knowledge is not a privilege. It's a right. &nbsp;|&nbsp; <a href="#">Privacy</a> &nbsp;|&nbsp; <a href="#">Terms</a></p>
+</div>
+
+<script>
+/* ── CURSOR ── */
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';cursor.style.background='var(--amber)';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='12px';cursor.style.height='12px';cursor.style.background='var(--teal)';});
+});
+
+/* ── NAVBAR ── */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>60));
+
+/* ── SCROLL REVEAL ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      const idx=Array.from(document.querySelectorAll('.chapter-block')).indexOf(e.target);
+      e.target.style.animationDelay=(idx*.1)+'s';
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:.08});
+document.querySelectorAll('.scroll-reveal').forEach(el=>obs.observe(el));
+
+/* ── FILTER ── */
+function filterTopics(level,btn){
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.topic-card').forEach(card=>{
+    if(level==='all'){card.style.display='';return;}
+    card.style.display=card.dataset.level&&card.dataset.level.includes(level)?'':'none';
+  });
+  // hide/show featured spanning
+  document.querySelectorAll('.topic-card.featured').forEach(c=>{
+    if(level!=='all'&&c.style.display==='none'){c.style.gridColumn='';}
+    else if(level==='all'){c.style.gridColumn='span 2';}
+  });
+}
+
+/* ── SEARCH ── */
+function searchTopics(query){
+  const q=query.toLowerCase().trim();
+  document.querySelectorAll('.topic-card').forEach(card=>{
+    const text=(card.querySelector('.topic-name')?.textContent||'').toLowerCase()+(card.querySelector('.topic-desc')?.textContent||'').toLowerCase();
+    card.style.display=(!q||text.includes(q))?'':'none';
+  });
+}
+
+/* ── PROGRESS ANIMATE ON LOAD (demo) ── */
+setTimeout(()=>{
+  const fills=document.querySelectorAll('.progress-fill');
+  const vals=[0,0,0,0,0,0,0];
+  fills.forEach((f,i)=>f.style.width=vals[i]+'%');
+},500);
+</script>
+</body>
+</html>

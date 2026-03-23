@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Newton's Three Laws of Motion explained deeply — with analogies, visual diagrams, real-life examples, and philosophical insight. Class 9–11 Physics."/>
+<meta property="og:title" content="Newton's Three Laws of Motion — EduVerse"/>
+<meta property="og:description" content="The rules that run the universe — explained the way your brain actually learns."/>
+<meta property="og:type" content="article"/>
+<title>Newton's Laws of Motion — EduVerse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#070d1f; --navy-mid:#0e1833; --navy-light:#162040; --navy-card:#111d3a;
+  --cream:#f0ead6; --cream-dim:#c8bfa8;
+  --teal:#00d4b4; --teal-dim:#009e87; --teal-glow:rgba(0,212,180,.12);
+  --amber:#f4a523; --rose:#e05c7a; --violet:#9b6bff; --green:#4cbb7a;
+  --text-light:#e2dccf; --text-muted:#8a8070; --line:rgba(240,234,214,.08);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--text-light);font-family:'Lora',Georgia,serif;overflow-x:hidden;cursor:none;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:var(--teal-dim);border-radius:3px;}
+
+/* CURSOR */
+.cursor{position:fixed;width:11px;height:11px;background:var(--teal);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s,background .18s;mix-blend-mode:screen;}
+.cursor-ring{position:fixed;width:34px;height:34px;border:1.5px solid rgba(0,212,180,.38);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .22s ease;}
+
+/* READING PROGRESS */
+.read-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber),var(--rose));z-index:201;width:0%;border-radius:0 2px 2px 0;}
+
+/* ══ NAVBAR ══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 4rem;background:rgba(7,13,31,.93);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,212,180,.09);}
+nav.scrolled{padding:.7rem 4rem;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:900;color:var(--cream);text-decoration:none;}
+.nav-logo span{color:var(--teal);}
+.nav-links{display:flex;gap:1.8rem;list-style:none;}
+.nav-links a{font-size:.85rem;color:var(--cream-dim);text-decoration:none;transition:color .2s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--teal);transition:width .3s;}
+.nav-links a:hover{color:var(--teal);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:transparent;border:1px solid var(--teal);color:var(--teal);padding:.42rem 1.2rem;border-radius:2px;font-family:'Lora',serif;font-size:.82rem;cursor:none;transition:background .22s,color .22s;}
+.nav-cta:hover{background:var(--teal);color:var(--navy);}
+
+/* AD */
+.ad-banner-top{background:rgba(14,24,51,.95);border-bottom:1px solid rgba(0,212,180,.07);text-align:center;padding:.5rem;margin-top:66px;z-index:10;position:relative;}
+.adph{display:inline-flex;align-items:center;justify-content:center;background:rgba(0,212,180,.03);border:1px dashed rgba(0,212,180,.18);border-radius:2px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:.67rem;letter-spacing:1px;}
+.adph.lead{width:728px;max-width:100%;height:58px;}
+.adph.rect{width:336px;height:280px;}
+.adph.side{width:300px;height:250px;}
+.adph.strip{width:100%;max-width:600px;height:80px;}
+
+/* BREADCRUMB */
+.breadcrumb{z-index:10;position:relative;background:var(--navy-mid);border-bottom:1px solid var(--line);padding:.65rem 4rem;display:flex;align-items:center;gap:.55rem;font-family:'JetBrains Mono',monospace;font-size:.67rem;letter-spacing:1px;flex-wrap:wrap;}
+.breadcrumb a{color:var(--teal);text-decoration:none;}
+.breadcrumb a:hover{opacity:.7;}
+.breadcrumb .sep{color:var(--text-muted);}
+.breadcrumb .cur{color:var(--cream-dim);}
+
+/* ══ LESSON HERO ══ */
+.lesson-hero{position:relative;z-index:10;background:linear-gradient(160deg,var(--navy-mid) 0%,#091628 100%);padding:3rem 4rem 2.5rem;border-bottom:1px solid var(--line);overflow:hidden;}
+.lesson-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 80% 30%,rgba(0,212,180,.06) 0%,transparent 65%),radial-gradient(ellipse 35% 50% at 10% 80%,rgba(244,165,35,.04) 0%,transparent 60%);pointer-events:none;}
+.hero-inner{max-width:860px;margin:0 auto;position:relative;z-index:2;}
+
+/* Tags */
+.lesson-tags{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1.1rem;}
+.ltag{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;padding:.25rem .65rem;border-radius:2px;border:1px solid;}
+.ltag-sub{color:var(--teal);border-color:rgba(0,212,180,.35);background:rgba(0,212,180,.07);}
+.ltag-lvl{color:var(--amber);border-color:rgba(244,165,35,.3);background:rgba(244,165,35,.06);}
+.ltag-diff{color:var(--green);border-color:rgba(76,187,122,.3);background:rgba(76,187,122,.06);}
+
+.lesson-title{font-family:'Playfair Display',serif;font-size:clamp(1.75rem,3.8vw,2.7rem);font-weight:900;color:var(--cream);line-height:1.18;letter-spacing:-.4px;margin-bottom:.9rem;}
+.lesson-subtitle{font-size:1rem;color:var(--cream-dim);line-height:1.78;max-width:640px;margin-bottom:1.6rem;}
+
+/* Meta */
+.lesson-meta-row{display:flex;align-items:center;gap:1.6rem;flex-wrap:wrap;padding-top:1.2rem;border-top:1px solid var(--line);}
+.meta-author{display:flex;align-items:center;gap:.65rem;}
+.author-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--teal-dim),var(--violet));display:flex;align-items:center;justify-content:center;font-size:.95rem;border:2px solid rgba(0,212,180,.28);}
+.author-name{font-size:.85rem;color:var(--cream);font-weight:500;}
+.author-role{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text-muted);letter-spacing:1px;margin-top:.1rem;}
+.mdivider{width:1px;height:30px;background:var(--line);}
+.mstat{display:flex;align-items:center;gap:.38rem;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-muted);letter-spacing:.5px;}
+
+/* ══ PAGE LAYOUT ══ */
+.page-wrapper{display:grid;grid-template-columns:1fr 290px;gap:2.5rem;max-width:1140px;margin:0 auto;padding:2.5rem 4rem;position:relative;z-index:10;align-items:start;}
+
+/* ══════════════════════════════
+   LESSON CONTENT
+══════════════════════════════ */
+.lesson-content{min-width:0;}
+.ad-top-content{text-align:center;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--line);}
+
+/* ── Typography ── */
+.article-body{font-size:1.03rem;line-height:1.88;color:var(--text-light);}
+.article-body h2{font-family:'Playfair Display',serif;font-size:1.65rem;font-weight:700;color:var(--cream);margin:3rem 0 1rem;padding-top:2.5rem;border-top:1px solid var(--line);letter-spacing:-.3px;}
+.article-body h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--cream);margin:2rem 0 .7rem;}
+.article-body h4{font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);margin:1.8rem 0 .6rem;}
+.article-body p{margin-bottom:1.35rem;}
+.article-body strong{color:var(--cream);font-weight:600;}
+.article-body em{color:var(--amber);font-style:italic;}
+.article-body a{color:var(--teal);text-decoration:underline;text-decoration-color:rgba(0,212,180,.3);}
+.article-body a:hover{text-decoration-color:var(--teal);}
+
+/* Blockquote */
+.article-body blockquote{border-left:3px solid var(--teal);margin:2rem 0;padding:1.1rem 1.4rem;background:rgba(0,212,180,.04);border-radius:0 3px 3px 0;font-style:italic;color:var(--cream-dim);font-size:1rem;}
+.article-body blockquote cite{display:block;margin-top:.55rem;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:.66rem;letter-spacing:1.5px;color:var(--text-muted);}
+
+/* Lists */
+.article-body ul,.article-body ol{padding-left:1.5rem;margin-bottom:1.35rem;}
+.article-body li{margin-bottom:.55rem;padding-left:.25rem;}
+.article-body ul li::marker{color:var(--teal);}
+.article-body ol li::marker{color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:.82rem;}
+
+/* ── CALLOUT BOXES ── */
+.callout{display:flex;gap:.9rem;align-items:flex-start;margin:1.8rem 0;padding:1.1rem 1.3rem;border-radius:3px;border:1px solid;font-size:.92rem;line-height:1.72;}
+.callout-icon{font-size:1.25rem;flex-shrink:0;margin-top:.05rem;}
+.callout-label{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:.28rem;}
+.callout.info{background:rgba(0,212,180,.05);border-color:rgba(0,212,180,.2);color:var(--cream-dim);}
+.callout.info .callout-label{color:var(--teal);}
+.callout.warning{background:rgba(244,165,35,.05);border-color:rgba(244,165,35,.2);color:var(--cream-dim);}
+.callout.warning .callout-label{color:var(--amber);}
+.callout.insight{background:rgba(155,107,255,.05);border-color:rgba(155,107,255,.2);color:var(--cream-dim);}
+.callout.insight .callout-label{color:var(--violet);}
+.callout.fun{background:rgba(224,92,122,.05);border-color:rgba(224,92,122,.2);color:var(--cream-dim);}
+.callout.fun .callout-label{color:var(--rose);}
+.callout.reallife{background:rgba(76,187,122,.05);border-color:rgba(76,187,122,.2);color:var(--cream-dim);}
+.callout.reallife .callout-label{color:var(--green);}
+
+/* ── FORMULA BOX ── */
+.formula-box{background:var(--navy-card);border:1px solid rgba(0,212,180,.22);border-radius:4px;padding:1.4rem 2rem;margin:2rem 0;text-align:center;position:relative;overflow:hidden;}
+.formula-box::before{content:'FORMULA';position:absolute;top:-.6rem;left:1.2rem;font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:2px;background:var(--navy-card);padding:0 .5rem;color:var(--teal);border:1px solid rgba(0,212,180,.2);border-radius:2px;}
+.formula-box::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 0%,rgba(0,212,180,.05),transparent 70%);pointer-events:none;}
+.formula{font-family:'JetBrains Mono',monospace;font-size:1.65rem;color:var(--cream);letter-spacing:3px;position:relative;z-index:1;}
+.formula sub{font-size:.75em;vertical-align:sub;}
+.formula sup{font-size:.75em;vertical-align:super;}
+.formula-note{font-size:.78rem;color:var(--text-muted);margin-top:.75rem;font-family:'JetBrains Mono',monospace;letter-spacing:.4px;position:relative;z-index:1;}
+
+/* ── LAW CARD ── */
+.law-card{background:var(--navy-card);border:1px solid var(--line);border-radius:4px;padding:1.8rem;margin:1.5rem 0;position:relative;overflow:hidden;transition:border-color .3s;}
+.law-card:hover{border-color:rgba(0,212,180,.25);}
+.law-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px;}
+.law-1::before{background:var(--teal);}
+.law-2::before{background:var(--amber);}
+.law-3::before{background:var(--violet);}
+.law-num{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:.5rem;}
+.law-1 .law-num{color:var(--teal);}
+.law-2 .law-num{color:var(--amber);}
+.law-3 .law-num{color:var(--violet);}
+.law-name{font-family:'Playfair Display',serif;font-size:1.12rem;font-weight:700;color:var(--cream);margin-bottom:.6rem;}
+.law-statement{font-style:italic;color:var(--cream-dim);font-size:.95rem;line-height:1.7;border-left:2px solid rgba(240,234,214,.1);padding-left:1rem;margin-bottom:.8rem;}
+.law-desc{font-size:.9rem;color:var(--text-muted);line-height:1.7;}
+
+/* ── VISUAL DIAGRAM (CSS) ── */
+.diagram-box{background:var(--navy-card);border:1px solid var(--line);border-radius:4px;padding:2rem;margin:2rem 0;position:relative;}
+.diagram-label{font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:3px;color:var(--teal);text-transform:uppercase;margin-bottom:1.2rem;}
+.diagram-caption{font-size:.8rem;color:var(--text-muted);text-align:center;margin-top:1rem;font-style:italic;}
+
+/* Force diagram */
+.force-diagram{display:flex;align-items:center;justify-content:center;gap:0;flex-direction:column;}
+.fd-row{display:flex;align-items:center;justify-content:center;gap:.5rem;margin:.5rem 0;}
+.fd-box{background:rgba(0,212,180,.12);border:1px solid rgba(0,212,180,.3);border-radius:3px;padding:.5rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--cream);white-space:nowrap;}
+.fd-arrow{font-size:1.3rem;color:var(--teal);}
+.fd-arrow.amber{color:var(--amber);}
+.fd-arrow.violet{color:var(--violet);}
+.fd-label{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text-muted);letter-spacing:1px;}
+
+/* Inertia visual */
+.bus-scene{display:flex;align-items:flex-end;justify-content:center;gap:2rem;padding:1.5rem 0;flex-wrap:wrap;}
+.bus-block{text-align:center;}
+.bus-emoji{font-size:2.5rem;display:block;margin-bottom:.3rem;transition:transform .3s;}
+.bus-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);letter-spacing:1px;}
+.motion-arrow{font-size:1.8rem;color:var(--teal);align-self:center;animation:pulse-arrow 1.5s ease-in-out infinite;}
+.brake-arrow{font-size:1.8rem;color:var(--rose);align-self:center;}
+@keyframes pulse-arrow{0%,100%{transform:translateX(0);}50%{transform:translateX(5px);}}
+
+/* 3rd Law action-reaction */
+.reaction-scene{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;padding:1rem 0;}
+.react-box{text-align:center;flex:1;min-width:120px;}
+.react-emoji{font-size:2rem;}
+.react-arrow{font-size:1.5rem;display:block;margin:.2rem 0;}
+.react-label{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);letter-spacing:1px;}
+.react-divider{font-size:1.5rem;color:var(--line);align-self:center;}
+
+/* Analogy card */
+.analogy-card{display:flex;gap:1.2rem;align-items:flex-start;background:rgba(244,165,35,.04);border:1px solid rgba(244,165,35,.18);border-radius:3px;padding:1.2rem 1.4rem;margin:1.5rem 0;}
+.analogy-icon{font-size:1.8rem;flex-shrink:0;}
+.analogy-title{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:.3rem;}
+.analogy-text{font-size:.9rem;color:var(--cream-dim);line-height:1.7;}
+
+/* Comparison table */
+.compare-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.88rem;}
+.compare-table th{background:var(--navy-card);font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);padding:.75rem 1rem;text-align:left;border:1px solid var(--line);}
+.compare-table td{padding:.75rem 1rem;border:1px solid var(--line);color:var(--cream-dim);vertical-align:top;line-height:1.6;}
+.compare-table tr:hover td{background:rgba(0,212,180,.03);}
+
+/* ── LAYER BADGES ── */
+.layer-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;padding:.22rem .65rem;border-radius:2px;margin-bottom:.8rem;}
+.lb-anchor{background:rgba(0,212,180,.1);color:var(--teal);border:1px solid rgba(0,212,180,.25);}
+.lb-build{background:rgba(155,107,255,.1);color:var(--violet);border:1px solid rgba(155,107,255,.25);}
+.lb-depth{background:rgba(244,165,35,.1);color:var(--amber);border:1px solid rgba(244,165,35,.25);}
+.lb-life{background:rgba(76,187,122,.1);color:var(--green);border:1px solid rgba(76,187,122,.25);}
+.lb-philo{background:rgba(224,92,122,.1);color:var(--rose);border:1px solid rgba(224,92,122,.25);}
+.lb-quiz{background:rgba(0,212,180,.1);color:var(--teal);border:1px solid rgba(0,212,180,.25);}
+
+/* ── QUIZ SECTION ── */
+.quiz-section{background:var(--navy-card);border:1px solid rgba(0,212,180,.18);border-radius:4px;padding:2rem;margin:2.5rem 0;}
+.quiz-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--cream);margin-bottom:1.5rem;display:flex;align-items:center;gap:.7rem;}
+.quiz-q{margin-bottom:1.5rem;}
+.quiz-q-text{font-size:.95rem;color:var(--cream-dim);margin-bottom:.8rem;line-height:1.7;}
+.quiz-options{display:flex;flex-direction:column;gap:.5rem;}
+.quiz-opt{background:rgba(240,234,214,.04);border:1px solid var(--line);border-radius:3px;padding:.65rem 1rem;font-size:.88rem;color:var(--cream-dim);cursor:none;transition:all .2s;display:flex;align-items:center;gap:.7rem;}
+.quiz-opt:hover{background:rgba(0,212,180,.06);border-color:rgba(0,212,180,.25);color:var(--cream);}
+.quiz-opt.correct{background:rgba(76,187,122,.1);border-color:var(--green);color:var(--green);}
+.quiz-opt.wrong{background:rgba(224,92,122,.08);border-color:var(--rose);color:var(--rose);}
+.quiz-opt-icon{font-size:.85rem;width:18px;text-align:center;flex-shrink:0;}
+.quiz-feedback{margin-top:.8rem;font-size:.85rem;line-height:1.65;padding:.7rem 1rem;border-radius:3px;display:none;}
+.quiz-feedback.show{display:block;}
+.quiz-feedback.good{background:rgba(76,187,122,.08);border:1px solid rgba(76,187,122,.2);color:var(--green);}
+.quiz-feedback.bad{background:rgba(224,92,122,.06);border:1px solid rgba(224,92,122,.18);color:var(--rose);}
+
+/* ── PHILOSOPHY BOX ── */
+.philo-box{background:linear-gradient(135deg,rgba(224,92,122,.06) 0%,rgba(155,107,255,.04) 100%);border:1px solid rgba(224,92,122,.2);border-radius:4px;padding:1.8rem;margin:2rem 0;}
+.philo-box h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-style:italic;color:var(--rose);margin-bottom:.8rem;}
+.philo-box p{font-size:.92rem;color:var(--cream-dim);line-height:1.78;}
+
+/* ── RETRIEVAL CHALLENGE ── */
+.retrieval-box{background:linear-gradient(135deg,rgba(0,212,180,.06) 0%,rgba(155,107,255,.04) 100%);border:1px solid rgba(0,212,180,.2);border-radius:4px;padding:1.8rem;margin:2rem 0;}
+.retrieval-box h3{font-family:'JetBrains Mono',monospace;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;}
+.retrieval-box ol{padding-left:1.2rem;}
+.retrieval-box li{margin-bottom:.7rem;font-size:.92rem;color:var(--cream-dim);line-height:1.7;}
+
+/* ── SHARE BAR ── */
+.share-bar{display:flex;align-items:center;gap:1rem;padding:1.5rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:2.5rem 0;flex-wrap:wrap;}
+.share-label{font-family:'JetBrains Mono',monospace;font-size:.68rem;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;}
+.share-btn{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:1.5px;padding:.4rem .9rem;border-radius:2px;border:1px solid;cursor:none;transition:all .2s;text-transform:uppercase;background:transparent;}
+.share-twitter{color:#1da1f2;border-color:rgba(29,161,242,.3);}
+.share-twitter:hover{background:rgba(29,161,242,.1);}
+.share-whatsapp{color:var(--green);border-color:rgba(76,187,122,.3);}
+.share-whatsapp:hover{background:rgba(76,187,122,.08);}
+.share-copy{color:var(--teal);border-color:rgba(0,212,180,.3);}
+.share-copy:hover{background:rgba(0,212,180,.08);}
+
+/* ── RELATED LESSONS ── */
+.related-section{margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--line);}
+.related-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--cream);margin-bottom:1.5rem;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;}
+.related-card{background:var(--navy-card);border:1px solid var(--line);border-radius:3px;padding:1.2rem;cursor:none;text-decoration:none;display:block;transition:transform .25s,border-color .25s;}
+.related-card:hover{transform:translateY(-3px);border-color:rgba(0,212,180,.3);}
+.rc-icon{font-size:1.5rem;margin-bottom:.6rem;display:block;}
+.rc-title{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--cream);margin-bottom:.35rem;line-height:1.4;transition:color .2s;}
+.related-card:hover .rc-title{color:var(--teal);}
+.rc-meta{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text-muted);letter-spacing:.5px;}
+
+/* ══ SIDEBAR ══ */
+.sidebar{position:sticky;top:100px;display:flex;flex-direction:column;gap:1.5rem;}
+.sidebar-card{background:var(--navy-mid);border:1px solid var(--line);border-radius:4px;padding:1.4rem;}
+.sidebar-title{font-family:'Playfair Display',serif;font-size:.88rem;font-weight:700;color:var(--cream);margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:1px solid var(--line);}
+
+/* TOC */
+.toc-list{list-style:none;display:flex;flex-direction:column;gap:.1rem;}
+.toc-item a{display:block;font-size:.8rem;color:var(--text-muted);text-decoration:none;padding:.4rem .6rem;border-left:2px solid transparent;transition:all .2s;line-height:1.4;}
+.toc-item a:hover,.toc-item a.active{color:var(--teal);border-left-color:var(--teal);background:rgba(0,212,180,.05);}
+.toc-item.sub a{padding-left:1.2rem;font-size:.76rem;}
+
+/* Lesson info */
+.info-rows{display:flex;flex-direction:column;gap:.7rem;}
+.info-row{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;}
+.info-key{color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:.67rem;letter-spacing:1px;}
+.info-val{color:var(--cream-dim);}
+
+.quick-links-side{display:flex;flex-direction:column;gap:.4rem;}
+.ql{display:flex;align-items:center;justify-content:space-between;padding:.55rem .7rem;border-radius:3px;text-decoration:none;font-size:.8rem;color:var(--cream-dim);transition:background .2s,color .2s;cursor:none;}
+.ql:hover{background:rgba(0,212,180,.07);color:var(--teal);}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── FOOTER STRIP ── */
+.footer-strip{background:#040810;border-top:1px solid var(--line);padding:1.8rem 4rem;text-align:center;position:relative;z-index:10;}
+.footer-strip p{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text-muted);letter-spacing:.5px;}
+.footer-strip a{color:var(--teal);text-decoration:none;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){.page-wrapper{grid-template-columns:1fr;}.sidebar{display:none;}}
+@media(max-width:768px){nav{padding:1rem 1.5rem;}.nav-links{display:none;}.lesson-hero,.breadcrumb,.page-wrapper,.footer-strip{padding-left:1.5rem;padding-right:1.5rem;}.bus-scene,.reaction-scene{flex-direction:column;align-items:center;}}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="read-progress" id="readBar"></div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Edu<span>Verse</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="physics.html">Physics</a></li>
+    <li><a href="#">Biology</a></li>
+    <li><a href="#">Mathematics</a></li>
+  </ul>
+  <button class="nav-cta">All Lessons</button>
+</nav>
+
+<!-- ADSENSE: LEADERBOARD -->
+<div class="ad-banner-top">
+  <div class="adph lead">[ AdSense Leaderboard 728×90 ]</div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="index.html">HOME</a><span class="sep">/</span>
+  <a href="physics.html">PHYSICS</a><span class="sep">/</span>
+  <a href="#">LAWS OF MOTION</a><span class="sep">/</span>
+  <span class="cur">NEWTON'S THREE LAWS</span>
+</div>
+
+<!-- ═══ LESSON HERO ═══ -->
+<div class="lesson-hero">
+  <div class="hero-inner">
+    <div class="lesson-tags">
+      <span class="ltag ltag-sub">⚛️ Physics</span>
+      <span class="ltag ltag-lvl">Class 9 · 10 · 11</span>
+      <span class="ltag ltag-diff">✦ Beginner → Intermediate</span>
+    </div>
+    <h1 class="lesson-title">Newton's Three Laws of Motion —<br/>The Rules That Run the Universe</h1>
+    <p class="lesson-subtitle">
+      Before Newton, motion was a mystery. After Newton, it became a formula.
+      Three laws. One apple (allegedly). And a complete rewrite of how humanity understood reality.
+    </p>
+    <div class="lesson-meta-row">
+      <div class="meta-author">
+        <div class="author-avatar">🧑‍🏫</div>
+        <div>
+          <div class="author-name">EduVerse Physics Team</div>
+          <div class="author-role">NCERT · Class 9–11</div>
+        </div>
+      </div>
+      <div class="mdivider"></div>
+      <div class="mstat"><span>📖</span> 18 min read</div>
+      <div class="mstat"><span>🔬</span> NCERT Ch. 8</div>
+      <div class="mstat"><span>📅</span> Updated 2025</div>
+      <div class="mstat"><span>👁️</span> 12,400 views</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAGE BODY ═══ -->
+<div class="page-wrapper">
+
+  <!-- ══════════ MAIN CONTENT ══════════ -->
+  <main class="lesson-content">
+
+    <!-- ADSENSE: TOP OF CONTENT -->
+    <div class="ad-top-content">
+      <div class="adph rect">[ AdSense Rectangle 336×280 ]</div>
+    </div>
+
+    <article class="article-body">
+
+      <!-- ════════ LAYER 1 — ANCHOR ════════ -->
+      <div class="layer-badge lb-anchor">🧲 Layer 1 — Anchor Your Brain</div>
+      <h2 id="anchor">Have You Ever Been Thrown Forward in a Bus?</h2>
+
+      <p>Picture this. You're sitting in a DTC bus in Delhi — maybe heading to school, headphones in, minding your own business. The bus is moving at 40 km/h. Suddenly, the driver slams the brakes.</p>
+
+      <p><strong>Your body lurches forward.</strong> You grab the seat in front of you. The aunty next to you almost spills her chai. The standing passengers stumble. The bus stopped — but <em>you</em> didn't want to.</p>
+
+      <div class="diagram-box">
+        <div class="diagram-label">// Visual — Inertia in a Braking Bus</div>
+        <div class="bus-scene">
+          <div class="bus-block">
+            <span class="bus-emoji">🚌</span>
+            <span class="bus-label">BUS (STOPS)</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:.3rem">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--rose)">BUS STOPS ❌</span>
+            <span class="brake-arrow">⬅</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--teal)">PASSENGER CONTINUES ➡</span>
+            <span class="motion-arrow">➡</span>
+          </div>
+          <div class="bus-block">
+            <span class="bus-emoji">🧍</span>
+            <span class="bus-label">YOU (STILL MOVING)</span>
+          </div>
+        </div>
+        <div class="diagram-caption">The bus stops. You don't. That gap — that stubbornness of your body — has a name: <strong style="color:var(--teal)">Inertia.</strong></div>
+      </div>
+
+      <p>That feeling right there? That lurch? That is <strong>Newton's First Law happening inside your body</strong>. The bus stopped. You kept going. Why? Because <em>nothing told your body to stop.</em></p>
+
+      <blockquote>
+        "Nature is lazy. Objects in motion want to stay in motion. Objects at rest want to stay at rest. It takes effort — force — to change that."
+        <cite>— The Spirit of Newton's First Law</cite>
+      </blockquote>
+
+      <!-- ════════ LAYER 2 — DESTABILIZE ════════ -->
+      <div class="layer-badge lb-build" style="margin-top:2rem">🤔 Layer 2 — Wait, Think Again</div>
+      <h2 id="destabilize">But Wait — Why Does the Moon NOT Fall?</h2>
+
+      <p>Before we go further, let me drop a question that should bother you:</p>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚡</span>
+        <div>
+          <span class="callout-label">Pause & Think</span>
+          <strong>Newton said gravity pulls everything toward Earth.</strong> The Moon is near Earth. So why doesn't the Moon fall down and crash into Earth? It's been up there for 4.5 billion years. Something is going on.
+        </div>
+      </div>
+
+      <p>Sit with that question. We'll answer it at the end. This is what physicists call a <strong>"productive tension"</strong> — a question that keeps your brain alert during the whole lesson. Your brain is now engaged. Good. Let's build.</p>
+
+      <!-- ════════ LAYER 3 — BUILD ════════ -->
+      <div class="layer-badge lb-build">⚙️ Layer 3 — Build Step by Step</div>
+      <h2 id="laws">The Three Laws — One by One</h2>
+
+      <p>Newton published his three laws in 1687 in a book called <em>Principia Mathematica</em>. It is arguably <strong>the most important science book ever written</strong>. He was 44. The apple story may or may not be fully true. What IS true: the ideas inside this book changed everything.</p>
+
+      <!-- LAW 1 -->
+      <h3 id="law1">🔵 First Law — The Law of Inertia</h3>
+
+      <div class="law-card law-1">
+        <div class="law-num">Newton's First Law</div>
+        <div class="law-name">Law of Inertia</div>
+        <div class="law-statement">"An object at rest stays at rest, and an object in motion stays in motion at the same speed and in the same direction, unless acted upon by an unbalanced external force."</div>
+        <div class="law-desc">Translation: <strong>Things are lazy.</strong> They don't want to change what they're doing. A cup on your table will stay there forever unless YOU move it. A ball rolling on a frictionless surface would roll forever.</div>
+      </div>
+
+      <h4>What is Inertia exactly?</h4>
+      <p><strong>Inertia</strong> is the resistance of any physical object to a change in its state of motion. It is NOT a force. It is a <em>property</em> of matter — like how stubbornness is a property of some people we know.</p>
+
+      <div class="callout info">
+        <span class="callout-icon">💡</span>
+        <div>
+          <span class="callout-label">Key Insight</span>
+          <strong>Mass IS inertia.</strong> A heavier object has more inertia — meaning it's harder to start moving AND harder to stop. A truck is harder to push than a bicycle. Same principle. More mass = more resistance to change.
+        </div>
+      </div>
+
+      <div class="analogy-card">
+        <span class="analogy-icon">🎯</span>
+        <div>
+          <div class="analogy-title">Analogy — The Sleeping Professor</div>
+          <div class="analogy-text">Imagine a professor deeply asleep in a chair. He will stay asleep (at rest) unless an alarm, a student, or an earthquake disturbs him. Once walking, he will keep walking down the same corridor at the same pace unless a door, a colleague, or gravity (stairs) acts on him. He is exhibiting textbook inertia. And also, relatable energy.</div>
+        </div>
+      </div>
+
+      <!-- LAW 2 -->
+      <h3 id="law2">🟡 Second Law — Force = Mass × Acceleration</h3>
+
+      <div class="law-card law-2">
+        <div class="law-num">Newton's Second Law</div>
+        <div class="law-name">Law of Acceleration</div>
+        <div class="law-statement">"The acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass."</div>
+        <div class="law-desc">The harder you push something, the faster it accelerates. The heavier it is, the slower it accelerates for the same push. Force, mass, and acceleration are three characters in the same story.</div>
+      </div>
+
+      <div class="formula-box">
+        <div class="formula">F = m × a</div>
+        <div class="formula-note">F = Force (Newtons, N) &nbsp;|&nbsp; m = Mass (kg) &nbsp;|&nbsp; a = Acceleration (m/s²)</div>
+      </div>
+
+      <h4>Understanding F = ma with a diagram</h4>
+
+      <div class="diagram-box">
+        <div class="diagram-label">// Visual — Same Force, Different Mass</div>
+        <div class="force-diagram">
+          <div class="fd-row">
+            <div class="fd-box">🏋️ Heavy Object (10 kg)</div>
+            <span class="fd-arrow">←</span>
+            <div class="fd-box" style="background:rgba(244,165,35,.1);border-color:rgba(244,165,35,.3)">Force: 10 N →</div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--amber)">a = 1 m/s²</span>
+          </div>
+          <div class="fd-row" style="margin-top:.8rem">
+            <div class="fd-box">🧸 Light Object (2 kg)</div>
+            <span class="fd-arrow">←</span>
+            <div class="fd-box" style="background:rgba(244,165,35,.1);border-color:rgba(244,165,35,.3)">Force: 10 N →</div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--teal)">a = 5 m/s² ⚡</span>
+          </div>
+        </div>
+        <div class="diagram-caption">Same force. 5× less mass = 5× more acceleration. F = ma never lies.</div>
+      </div>
+
+      <div class="analogy-card">
+        <span class="analogy-icon">⚽</span>
+        <div>
+          <div class="analogy-title">Analogy — Kicking a Football vs. a Boulder</div>
+          <div class="analogy-text">Kick a football with full force — it flies 30 meters. Kick a 10 kg boulder with the same force — it barely moves (and your toe cries). Same force (F). Different mass (m). Different acceleration (a). F = ma. Your body already understood this before Newton wrote it down.</div>
+        </div>
+      </div>
+
+      <div class="callout info">
+        <span class="callout-icon">📌</span>
+        <div>
+          <span class="callout-label">Units Matter</span>
+          <strong>1 Newton (N)</strong> = the force needed to accelerate 1 kg at 1 m/s². It's named after Newton himself. So every time you say "10 Newtons of force," you're literally saying his name. He would have appreciated it.
+        </div>
+      </div>
+
+      <!-- LAW 3 -->
+      <h3 id="law3">🟣 Third Law — Action and Reaction</h3>
+
+      <div class="law-card law-3">
+        <div class="law-num">Newton's Third Law</div>
+        <div class="law-name">Law of Action–Reaction</div>
+        <div class="law-statement">"For every action, there is an equal and opposite reaction."</div>
+        <div class="law-desc">Every force you apply has a twin — equal in size, opposite in direction, acting on the <em>other</em> object. Forces never come alone. They always come in pairs.</div>
+      </div>
+
+      <div class="diagram-box">
+        <div class="diagram-label">// Visual — Action–Reaction Pairs</div>
+        <div class="reaction-scene">
+          <div class="react-box">
+            <div class="react-emoji">🏊</div>
+            <span class="react-arrow" style="color:var(--teal)">← pushes water back</span>
+            <span class="react-label">ACTION</span>
+          </div>
+          <div class="react-divider">⚡</div>
+          <div class="react-box">
+            <div class="react-emoji">💧</div>
+            <span class="react-arrow" style="color:var(--violet)">pushes swimmer forward →</span>
+            <span class="react-label">REACTION</span>
+          </div>
+        </div>
+        <div class="diagram-caption">The swimmer pushes water backward (action). Water pushes the swimmer forward (reaction). That's how swimming works.</div>
+      </div>
+
+      <div class="callout warning">
+        <span class="callout-icon">⚠️</span>
+        <div>
+          <span class="callout-label">Common Misconception</span>
+          Action and reaction forces are EQUAL — but they act on <strong>different objects</strong>. They do NOT cancel each other out. The Earth pulls you down (gravity). You pull the Earth up (reaction). But since Earth's mass is 6×10²⁴ kg, its acceleration toward you is basically zero. The forces are equal. The effects are not.
+        </div>
+      </div>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Reaction</th>
+            <th>Why It Works</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>🚀 Rocket expels gas downward</td><td>Gas pushes rocket upward</td><td>You go to space. Because physics.</td></tr>
+          <tr><td>🦅 Bird's wings push air down</td><td>Air pushes bird up</td><td>Flight. That's the whole secret of flight.</td></tr>
+          <tr><td>🚶 You push ground backward (walking)</td><td>Ground pushes you forward</td><td>You move forward. Every single step.</td></tr>
+          <tr><td>🔫 Gun fires bullet forward</td><td>Bullet pushes gun backward (recoil)</td><td>Recoil. Why guns kick back.</td></tr>
+        </tbody>
+      </table>
+
+      <!-- ADSENSE MID-CONTENT -->
+      <div style="text-align:center;margin:2.5rem 0;padding:1.5rem 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+        <div class="adph strip">[ AdSense In-Article 600×80 ]</div>
+      </div>
+
+      <!-- ════════ LAYER 4 — ILLUMINATE ════════ -->
+      <div class="layer-badge lb-depth">🔭 Layer 4 — The Depth Beneath</div>
+      <h2 id="depth">What Textbooks Quietly Don't Tell You</h2>
+
+      <h3>Newton's Laws Have Limits</h3>
+      <p>Newton's laws are brilliant — but they are not the final word. Here is what your standard Class 9 textbook won't mention (but you deserve to know):</p>
+
+      <div class="callout insight">
+        <span class="callout-icon">🌌</span>
+        <div>
+          <span class="callout-label">Advanced Insight</span>
+          <strong>Newton's laws fail at two extremes:</strong><br/>
+          1. <strong>Very fast speeds</strong> (near the speed of light) → You need Einstein's Special Relativity<br/>
+          2. <strong>Very small scales</strong> (atoms, electrons) → You need Quantum Mechanics<br/>
+          Newton was not wrong. He described the world we live in perfectly. Einstein and Planck simply found the edges of that world.
+        </div>
+      </div>
+
+      <h3>The Answer to the Moon Question</h3>
+      <p>Remember our earlier puzzle? <em>Why doesn't the Moon fall?</em> Here's the answer:</p>
+      <p><strong>It does fall.</strong> Constantly. But it also moves forward so fast that as it falls, the Earth curves away beneath it. The Moon is in a perpetual state of falling toward Earth while also moving sideways fast enough to keep missing it. It's been "missing" Earth for 4.5 billion years.</p>
+
+      <div class="callout fun">
+        <span class="callout-icon">😄</span>
+        <div>
+          <span class="callout-label">Delightful Fact</span>
+          Newton himself described orbits this way: imagine a cannon on a very tall mountain. Fire it with more and more force. At some speed, the cannonball falls — but Earth curves away as fast as it falls. The cannonball never lands. It becomes a satellite. That is literally how satellites work. Newton invented satellite theory in 1687 — 270 years before Sputnik.
+        </div>
+      </div>
+
+      <!-- ════════ LAYER 5 — REAL LIFE ════════ -->
+      <div class="layer-badge lb-life">🌍 Layer 5 — Real Life, Everywhere</div>
+      <h2 id="reallife">Newton's Laws in Your Daily Life</h2>
+
+      <p>These are not abstract ideas from a textbook. They are happening around you, <em>right now</em>, every second. Let's see them in action:</p>
+
+      <div class="callout reallife">
+        <span class="callout-icon">🪑</span>
+        <div>
+          <span class="callout-label">1st Law in Real Life — Seatbelts</span>
+          When a car crashes, the car stops suddenly. But your body — due to inertia — continues forward at the previous speed. The seatbelt applies a backward force to stop you. Without it, you'd fly through the windshield. Newton's First Law literally saves lives.
+        </div>
+      </div>
+
+      <div class="callout reallife">
+        <span class="callout-icon">🏏</span>
+        <div>
+          <span class="callout-label">2nd Law in Real Life — Cricket</span>
+          A fast bowler bowls at 140 km/h. The ball has mass (≈155g). F = ma. The batsman must apply a large force in a short time to change the ball's direction. That's why heavy bats are used — more mass = more force in the shot. MS Dhoni knew F = ma. He just never wrote it down.
+        </div>
+      </div>
+
+      <div class="callout reallife">
+        <span class="callout-icon">🚀</span>
+        <div>
+          <span class="callout-label">3rd Law in Real Life — ISRO Rockets</span>
+          India's ISRO Chandrayaan and Mangalyaan missions work entirely on Newton's Third Law. Rocket fuel burns and expels gas downward (action). Gas pushes rocket upward and forward (reaction). In empty space — where nothing can "push against" — this is the ONLY way to move. Newton is literally on the Moon.
+        </div>
+      </div>
+
+      <!-- ════════ LAYER 6 — PHILOSOPHY ════════ -->
+      <div class="layer-badge lb-philo">🦉 Layer 6 — The Philosophical Edge</div>
+      <h2 id="philosophy">The Soul of Newton's Laws</h2>
+
+      <div class="philo-box">
+        <h3>"If nothing acts on you, you continue forever in the same direction..."</h3>
+        <p>Newton's First Law, if you step back and look at it philosophically, is a statement about <strong>the natural state of the universe being continuation, not change.</strong> Change requires effort. Change requires force. Without intervention, everything persists in its current state — whether that is a billiard ball rolling, a mind stuck in old beliefs, or a civilization refusing to reform.</p>
+        <p style="margin-top:1rem">In Indian philosophy, this connects to the concept of <strong>Samskaras</strong> — the deep impressions left on the mind that perpetuate themselves without conscious intervention. Just as a physical object needs an external force to change its path, a human being needs effort — <em>sadhana</em>, awareness, or a shock — to change deeply ingrained patterns. Newton was describing physics. He was also, unknowingly, describing psychology.</p>
+        <p style="margin-top:1rem">Ask yourself: <em>What forces are acting on your life right now? And what inertia are you still carrying?</em></p>
+      </div>
+
+      <!-- ════════ LAYER 7 — RETRIEVAL ════════ -->
+      <div class="layer-badge lb-quiz" style="margin-top:2.5rem">🧠 Layer 7 — Burn It In</div>
+      <h2 id="quiz">Quick Quiz — Test What Stuck</h2>
+      <p>Memory is not storage — it's reconstruction. Answer these without scrolling up. That struggle is where learning happens.</p>
+
+      <div class="quiz-section">
+        <div class="quiz-title">⚡ Retrieval Questions</div>
+
+        <!-- Q1 -->
+        <div class="quiz-q" id="q1">
+          <div class="quiz-q-text"><strong>Q1.</strong> A book is lying on a table. No one touches it. According to Newton's First Law, what will the book do?</div>
+          <div class="quiz-options">
+            <div class="quiz-opt" onclick="answer(this,'q1','wrong')"><span class="quiz-opt-icon">○</span> Slowly slide off the table due to gravity</div>
+            <div class="quiz-opt" onclick="answer(this,'q1','correct')"><span class="quiz-opt-icon">○</span> Stay exactly where it is — forever, unless a force acts on it</div>
+            <div class="quiz-opt" onclick="answer(this,'q1','wrong')"><span class="quiz-opt-icon">○</span> Start vibrating because atoms are moving inside it</div>
+          </div>
+          <div class="quiz-feedback" id="q1-fb"></div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="quiz-q" id="q2">
+          <div class="quiz-q-text"><strong>Q2.</strong> You apply a force of 20 N to a 4 kg object. What is its acceleration?</div>
+          <div class="quiz-options">
+            <div class="quiz-opt" onclick="answer(this,'q2','wrong')"><span class="quiz-opt-icon">○</span> 80 m/s²</div>
+            <div class="quiz-opt" onclick="answer(this,'q2','correct')"><span class="quiz-opt-icon">○</span> 5 m/s²</div>
+            <div class="quiz-opt" onclick="answer(this,'q2','wrong')"><span class="quiz-opt-icon">○</span> 0.2 m/s²</div>
+          </div>
+          <div class="quiz-feedback" id="q2-fb"></div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="quiz-q" id="q3">
+          <div class="quiz-q-text"><strong>Q3.</strong> When a swimmer pushes water backward, the water pushes the swimmer forward. Which law is this?</div>
+          <div class="quiz-options">
+            <div class="quiz-opt" onclick="answer(this,'q3','wrong')"><span class="quiz-opt-icon">○</span> Newton's First Law — Law of Inertia</div>
+            <div class="quiz-opt" onclick="answer(this,'q3','wrong')"><span class="quiz-opt-icon">○</span> Newton's Second Law — F = ma</div>
+            <div class="quiz-opt" onclick="answer(this,'q3','correct')"><span class="quiz-opt-icon">○</span> Newton's Third Law — Action and Reaction</div>
+          </div>
+          <div class="quiz-feedback" id="q3-fb"></div>
+        </div>
+      </div>
+
+      <!-- RETRIEVAL CHALLENGE -->
+      <div class="retrieval-box">
+        <h3>🎯 Your 24-Hour Challenge</h3>
+        <ol>
+          <li>Tonight, <strong>explain Newton's three laws to someone at home</strong> — a family member, a friend — using only one real-life example for each. No notes.</li>
+          <li>Tomorrow morning, <strong>notice three examples of Newton's laws</strong> before 9 AM. (Hint: they're in your morning chai, your walk, your bus ride.)</li>
+          <li>Can you think of a situation where <strong>all three laws act simultaneously?</strong> (A rocket launch is one. Can you find another?)</li>
+        </ol>
+      </div>
+
+      <!-- MNEMONIC -->
+      <div class="callout insight">
+        <span class="callout-icon">🧠</span>
+        <div>
+          <span class="callout-label">Memory Hook — Newton's Laws as Life Advice</span>
+          <strong>1st Law:</strong> "Don't change unless you have a reason to." (Inertia of habits)<br/>
+          <strong>2nd Law:</strong> "Push harder, achieve more. But weight matters." (Effort × Mass = Result)<br/>
+          <strong>3rd Law:</strong> "Every action has consequences — equal and opposite."<br/><br/>
+          Newton's laws work on billiard balls. They also work on life. Coincidence? Probably.
+        </div>
+      </div>
+
+      <!-- SHARE -->
+      <div class="share-bar">
+        <span class="share-label">Share this lesson:</span>
+        <button class="share-btn share-twitter">𝕏 Twitter</button>
+        <button class="share-btn share-whatsapp">📱 WhatsApp</button>
+        <button class="share-btn share-copy" onclick="copyLink(this)">🔗 Copy Link</button>
+      </div>
+
+      <!-- ADSENSE: END OF CONTENT -->
+      <div style="text-align:center;margin:1rem 0 2rem;">
+        <div class="adph rect">[ AdSense Rectangle 336×280 ]</div>
+      </div>
+
+      <!-- RELATED LESSONS -->
+      <div class="related-section">
+        <div class="related-title">Continue Learning →</div>
+        <div class="related-grid">
+          <a href="#" class="related-card">
+            <span class="rc-icon">🌍</span>
+            <div class="rc-title">Universal Gravitation</div>
+            <div class="rc-meta">Physics · 12 min · Class 9</div>
+          </a>
+          <a href="#" class="related-card">
+            <span class="rc-icon">⚡</span>
+            <div class="rc-title">Work, Energy & Power</div>
+            <div class="rc-meta">Physics · 15 min · Class 9</div>
+          </a>
+          <a href="#" class="related-card">
+            <span class="rc-icon">🔄</span>
+            <div class="rc-title">Conservation of Momentum</div>
+            <div class="rc-meta">Physics · 10 min · Class 10</div>
+          </a>
+          <a href="#" class="related-card">
+            <span class="rc-icon">🌊</span>
+            <div class="rc-title">Young's Double Slit</div>
+            <div class="rc-meta">Physics · 18 min · Class 11</div>
+          </a>
+        </div>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- ══════════ SIDEBAR ══════════ -->
+  <aside class="sidebar">
+
+    <!-- Table of Contents -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">📋 In This Lesson</div>
+      <ul class="toc-list" id="toc">
+        <li class="toc-item"><a href="#anchor">Have You Been Thrown Forward?</a></li>
+        <li class="toc-item"><a href="#destabilize">Why Doesn't the Moon Fall?</a></li>
+        <li class="toc-item"><a href="#laws">The Three Laws</a></li>
+        <li class="toc-item sub"><a href="#law1">🔵 First Law — Inertia</a></li>
+        <li class="toc-item sub"><a href="#law2">🟡 Second Law — F=ma</a></li>
+        <li class="toc-item sub"><a href="#law3">🟣 Third Law — Reaction</a></li>
+        <li class="toc-item"><a href="#depth">What Textbooks Don't Say</a></li>
+        <li class="toc-item"><a href="#reallife">Real Life Examples</a></li>
+        <li class="toc-item"><a href="#philosophy">The Philosophical Edge</a></li>
+        <li class="toc-item"><a href="#quiz">Quick Quiz</a></li>
+      </ul>
+    </div>
+
+    <!-- Lesson Info -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">📌 Lesson Info</div>
+      <div class="info-rows">
+        <div class="info-row"><span class="info-key">Subject</span><span class="info-val">Physics</span></div>
+        <div class="info-row"><span class="info-key">Chapter</span><span class="info-val">Laws of Motion</span></div>
+        <div class="info-row"><span class="info-key">Level</span><span class="info-val">Class 9–11</span></div>
+        <div class="info-row"><span class="info-key">Read Time</span><span class="info-val">~18 minutes</span></div>
+        <div class="info-row"><span class="info-key">NCERT Ref</span><span class="info-val">Ch. 8, Class 9</span></div>
+        <div class="info-row"><span class="info-key">Difficulty</span><span class="info-val" style="color:var(--green)">Beginner → Mid</span></div>
+      </div>
+    </div>
+
+    <!-- ADSENSE SIDEBAR -->
+    <div style="text-align:center">
+      <div class="adph side">[ AdSense 300×250 ]</div>
+    </div>
+
+    <!-- More in Physics -->
+    <div class="sidebar-card">
+      <div class="sidebar-title">⚛️ More in Physics</div>
+      <div class="quick-links-side">
+        <a href="#" class="ql"><span>🌍 Gravitation</span><span style="font-size:.75rem;color:var(--text-muted)">→</span></a>
+        <a href="#" class="ql"><span>💪 Work & Energy</span><span style="font-size:.75rem;color:var(--text-muted)">→</span></a>
+        <a href="#" class="ql"><span>🌊 Light & Optics</span><span style="font-size:.75rem;color:var(--text-muted)">→</span></a>
+        <a href="#" class="ql"><span>🔌 Electricity</span><span style="font-size:.75rem;color:var(--text-muted)">→</span></a>
+        <a href="#" class="ql"><span>⚗️ Thermodynamics</span><span style="font-size:.75rem;color:var(--text-muted)">→</span></a>
+      </div>
+    </div>
+
+    <!-- ADSENSE SIDEBAR 2 -->
+    <div style="text-align:center">
+      <div class="adph side">[ AdSense 300×250 ]</div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-strip">
+  <p>© 2025 <a href="index.html">EduVerse</a> — Knowledge is not a privilege. It's a right. &nbsp;|&nbsp; <a href="#">Privacy</a> &nbsp;|&nbsp; <a href="#">Terms</a></p>
+</div>
+
+<script>
+/* CURSOR */
+const cursor=document.getElementById('cursor');
+const ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function ar(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
+document.querySelectorAll('a,button,.quiz-opt').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.width='20px';cursor.style.height='20px';cursor.style.background='var(--amber)';});
+  el.addEventListener('mouseleave',()=>{cursor.style.width='11px';cursor.style.height='11px';cursor.style.background='var(--teal)';});
+});
+
+/* NAVBAR SCROLL */
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',scrollY>60));
+
+/* READING PROGRESS */
+const bar=document.getElementById('readBar');
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  const pct=(d.scrollTop/(d.scrollHeight-d.clientHeight))*100;
+  bar.style.width=Math.min(pct,100)+'%';
+});
+
+/* TOC ACTIVE */
+const sections=['anchor','destabilize','laws','law1','law2','law3','depth','reallife','philosophy','quiz'];
+const tocLinks=document.querySelectorAll('#toc a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&window.scrollY>=el.offsetTop-140) cur=id;
+  });
+  tocLinks.forEach(a=>{
+    a.classList.remove('active');
+    if(a.getAttribute('href')==='#'+cur) a.classList.add('active');
+  });
+});
+
+/* QUIZ */
+const feedback={
+  q1:{correct:'✅ Exactly right! The First Law is the law of inertia — objects at rest stay at rest until a force acts on them. The book will sit there until the heat death of the universe. Loyal little book.',
+      wrong:'❌ Not quite. Newton\'s First Law says objects at rest stay at rest unless a force acts on them. The book is in balance — gravity pulls down, the table pushes up. Net force = zero. No motion.'},
+  q2:{correct:'✅ Perfect! F = ma → a = F/m = 20/4 = 5 m/s². You\'ve internalized the formula. Newton is proud.',
+      wrong:'❌ Let\'s redo this: a = F ÷ m = 20 ÷ 4 = 5 m/s². Remember: divide force by mass to get acceleration. Not multiply.'},
+  q3:{correct:'✅ That\'s Newton\'s Third Law! The swimmer pushes water (action) — water pushes swimmer (reaction). Equal forces, opposite directions, different objects.',
+      wrong:'❌ This is the Third Law — Action and Reaction. Every force has a twin that acts on the other object, equal in size but opposite in direction.'}
+};
+const answered={};
+function answer(el,qid,result){
+  if(answered[qid]) return;
+  answered[qid]=true;
+  const opts=el.parentNode.querySelectorAll('.quiz-opt');
+  opts.forEach(o=>o.style.pointerEvents='none');
+  el.classList.add(result);
+  const fb=document.getElementById(qid+'-fb');
+  fb.textContent=feedback[qid][result];
+  fb.className='quiz-feedback show '+(result==='correct'?'good':'bad');
+}
+
+/* COPY LINK */
+function copyLink(btn){
+  navigator.clipboard.writeText(window.location.href).then(()=>{
+    btn.textContent='✓ Copied!';
+    btn.style.color='var(--green)';
+    setTimeout(()=>{btn.textContent='🔗 Copy Link';btn.style.color='';},2500);
+  });
+}
+</script>
+</body>
+</html>
